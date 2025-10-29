@@ -1,0 +1,19 @@
+Normal Select
+Help Select
+Working in Background
+Busy
+Precision Select
+Text Select
+Handwriting
+Unavailable / No
+Vertical Resize
+Horizontal Resize
+Diagonal Resize 1
+Diagonal Resize 2
+Move
+Alternate Select
+Link Select
+Location Select
+Person Select
+Pin / Unpin
+
