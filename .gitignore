@@ -1,2 +1,14 @@
+# Backup directories
 *.backup/
+
+# Backup files
 *~
+*.bak
+*.tmp
+*.swp
+*.swo
+*.old
+*.orig
+*.save
+# Emacs autosave
+.~*
