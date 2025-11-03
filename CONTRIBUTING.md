@@ -1,4 +1,9 @@
-## 🧭 Branch Workflow Guide
+
+# Notes
+
+Check [NOTE.md](https://github.com/fluoritevivystar/Augusta_Cursors/blob/nightly/NOTE.md) occasionally for what to do.
+
+# 🧭 Branch Workflow Guide
 
 Hey! Here’s how we’re managing the repo branches so things stay clean and organized.
 We’re using two main branches: main and nightly.
