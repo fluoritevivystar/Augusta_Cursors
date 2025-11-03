@@ -1,5 +1,5 @@
 
-# Notes
+# 📝 Notes
 
 Check [NOTE.md](https://github.com/fluoritevivystar/Augusta_Cursors/blob/nightly/NOTE.md) occasionally for what to do.
 
@@ -61,6 +61,14 @@ git merge main
 ```
 ## ⚠️ Important Notes
 
+✅ Make a copy of the folder (directory) with a similar name adding a `.backup` suffix:
+```
+# In Unix-like shells 
+cp -r src/ src.backup/
+
+# In PowerShell
+Copy-Item -Path ".\src" -Destination ".\src.backup" -Recurse
+```
 ✅ Always pull before you start working:
 ```
 git pull origin nightly
@@ -68,6 +76,7 @@ git pull origin nightly
 
 ❌ Don’t push experimental stuff directly to main.
 ✅ Only merge to main when we’re sure it’s working.
+
 
 ## 🌙 Future Idea (Optional)
 
