@@ -28,8 +28,8 @@ mkdir -p "${WINDOWS_DIR}"
 check_requirements() {
     echo -e "${YELLOW}Checking requirements...${NC}"
     
-    if ! command -v convert &> /dev/null; then
-        echo -e "${RED}Error: ImageMagick (convert) is not installed.${NC}"
+    if ! command -v magick &> /dev/null; then
+        echo -e "${RED}Error: ImageMagick is not installed.${NC}"
         echo "Install with: sudo apt-get install imagemagick (Ubuntu/Debian)"
         echo "or: brew install imagemagick (macOS)"
         exit 1
@@ -46,7 +46,7 @@ check_requirements() {
 
 # Create cursor configuration
 create_config() {
-    local cursor_name='Augusta_Cursors'
+    local cursor_name=$1
     local hotspots=$2
     local config_file="${THEME_DIR}/configs/${cursor_name}.cfg"
     
@@ -71,13 +71,13 @@ create_config() {
                 coords="${hotspot#*:}"
                 x="${coords%,*}"
                 y="${coords#*,}"
-                echo "${size} ${x} ${y} ${cursor_name}_${size}.png"
+                echo "${size} ${x} ${y} build/${cursor_name}_${size}.png"
             else
                 # Default hotspot for all sizes
                 x="${hotspot%,*}"
                 y="${hotspot#*,}"
                 for size in 24 32 48 64 96; do
-                    echo "${size} ${x} ${y} ${cursor_name}_${size}.png"
+                    echo "${size} ${x} ${y} build/${cursor_name}_${size}.png"
                 done
             fi
         done
@@ -107,7 +107,7 @@ resize_cursors() {
     # Resize to standard cursor sizes
     local sizes=(24 32 48 64 96)
     for size in "${sizes[@]}"; do
-        convert "${source_png}" -resize ${size}x${size} \
+        magick "${source_png}" -resize ${size}x${size} \
             "${THEME_DIR}/build/${cursor_name}_${size}.png"
     done
 }
@@ -130,7 +130,7 @@ process_animated() {
         
         for frame in "${frames[@]}"; do
             frame_count=$((frame_count + 1))
-            convert "${frame}" -resize ${size}x${size} \
+            magick "${frame}" -resize ${size}x${size} \
                 "${THEME_DIR}/build/${cursor_name}_${size}/frame_${frame_count}.png"
         done
         
@@ -269,7 +269,7 @@ build_windows() {
             for size in "${win_sizes[@]}"; do
                 if [ -f "${THEME_DIR}/build/${xcursor_name}_${size}.png" ]; then
                     # Static cursor
-                    convert "${THEME_DIR}/build/${xcursor_name}_${size}.png" \
+                    magick "${THEME_DIR}/build/${xcursor_name}_${size}.png" \
                         -define icon:auto-resize="${size}" \
                         "${WINDOWS_DIR}/${win_name}.cur"
                     break
@@ -282,7 +282,7 @@ build_windows() {
                 local frame_files=($(ls -v "${THEME_DIR}/build/${xcursor_name}_32"/*.png))
                 if [ ${#frame_files[@]} -gt 0 ]; then
                     # Create animated .ani file using ImageMagick
-                    convert -delay 5 -loop 0 "${frame_files[@]}" \
+                    magick -delay 5 -loop 0 "${frame_files[@]}" \
                         "${WINDOWS_DIR}/${win_name}.ani"
                 fi
             fi

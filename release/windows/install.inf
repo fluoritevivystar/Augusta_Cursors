@@ -1,0 +1,12 @@
+[Version]
+Signature="$Chicago$"
+
+[DefaultInstall]
+CopyFiles = Cursor.Files
+AddReg = Cursor.Reg
+
+[Cursor.Files]
+Augusta_Cursors.cursor
+
+[Cursor.Reg]
+HKCU,"Control Panel\Cursors\Schemes","Augusta_Cursors",0,"Augusta_Cursors.cursor"
